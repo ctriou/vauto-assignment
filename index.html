@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>vAuto coding extravaganza</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/vue/dist/vue.min.js"></script>
+  <script src="bower_components/chance/dist/chance.min.js"></script>
+  <style>
+    @import "bower_components/bootstrap/dist/css/bootstrap.min.css";
+    code {
+      padding: 0;
+      padding-top: 0.2em;
+      padding-bottom: 0.2em;
+      margin: 0;
+      font-size: 85%;
+      background-color: rgba(0, 0, 0, 0.04);
+      border-radius: 3px;
+    }
+    
+    code::before,
+    code::after {
+      letter-spacing: -0.2em;
+      content: "\00a0";
+    }
+  </style>
+</head>
+
+<body id="vueApp">
+  <div class="container">
+    <h3>vAuto coding extravaganza</h3>
+    <p>
+      The purpose of this page is to take words entered into the box below and print them in a sorted 4 column grid below, from
+      top to bottom.
+    </p>
+
+    <p>
+      <input type="text" class="form-control" v-model="userInput" @keyup.enter="makeColumns">
+    </p>
+
+    <div class="row">
+      <span class="col-md-3" v-for="column in resultColumns">
+          <div v-for="word in column">{{word}}</div>
+      </span>
+    </div>
+
+  </div>
+
+
+  <script>
+    (function(){
+      
+      var vm = new Vue({
+        el: "#vueApp",
+        data: {
+          userInput: chance.sentence().toLowerCase(),
+          resultColumns: []
+        },
+        methods: {
+          makeColumns: function() {
+
+            this.resultColumns = [];
+
+            var words = this.userInput.split(" ").sort();
+            var columns = 4;
+            var wordsPerColumn = Math.floor(words.length / columns);
+            var columnsWithExtra = words.length % columns;
+
+            var i = 0;
+            while (i < columns){
+
+              var startIndex = i*wordsPerColumn;
+              var wordsInColumn = wordsPerColumn;
+
+              if (i < columnsWithExtra) wordsInColumn++;
+
+              var endIndex = startIndex+wordsInColumn;
+
+              this.resultColumns.push(words.slice(startIndex, endIndex));
+              i++;
+            } 
+          }
+        }
+      })
+
+      vm.makeColumns();
+
+    })()
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "assignment",
+  "description": "vAuto code challenge",
+  "main": "index.html",
+  "authors": [
+    "Clinton Triou"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "^1.0.26",
+    "chance": "^1.0.3",
+    "bootstrap": "^3.3.6"
+  }
+}
