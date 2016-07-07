@@ -70,14 +70,13 @@
             var i = 0;
             while (i < columns){
 
-              var startIndex = i*wordsPerColumn;
               var wordsInColumn = wordsPerColumn;
 
               if (i < columnsWithExtra) wordsInColumn++;
 
-              var endIndex = startIndex+wordsInColumn;
+              this.resultColumns.push(words.slice(0, wordsInColumn));
+              words.splice(0, wordsInColumn);
 
-              this.resultColumns.push(words.slice(startIndex, endIndex));
               i++;
             } 
           }
