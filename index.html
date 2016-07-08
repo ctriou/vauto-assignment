@@ -45,7 +45,7 @@
 
             this.resultColumns = [];
 
-            var words = this.userInput.split(" ").sort();
+            var words = this.userInput.trim().split(" ").sort();
             var columns = 4;
             var wordsPerColumn = Math.floor(words.length / columns);
             var columnsWithExtra = words.length % columns;
@@ -54,11 +54,9 @@
             while (i < columns){
 
               var wordsInColumn = wordsPerColumn;
-
               if (i < columnsWithExtra) wordsInColumn++;
 
-              this.resultColumns.push(words.slice(0, wordsInColumn));
-              words.splice(0, wordsInColumn);
+              this.resultColumns.push(words.splice(0, wordsInColumn));
 
               i++;
             } 
